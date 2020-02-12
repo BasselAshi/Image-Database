@@ -8,13 +8,25 @@
 #include "tree.h"
 #include "utils.h"
 
-int main(void) {
+void printError()
+{
+        fprintf(stderr, "Invalid command.\n");
+}
+
+int main(void)
+{
 
         // char array to hold a line of input
-	char buf[BUFFER_SIZE] = {'\0'};
+        char buf[BUFFER_SIZE] = {'\0'};
 
         // char* array to hold the pointers to tokens
-	//char *args[INPUT_ARG_MAX_NUM];
+        char *args[INPUT_ARG_MAX_NUM];
+        args[0] = malloc(BUFFER_SIZE);
+        args[1] = malloc(BUFFER_SIZE);
+        args[2] = malloc(BUFFER_SIZE);
+        args[3] = malloc(BUFFER_SIZE);
+        args[4] = malloc(BUFFER_SIZE);
+        int numArgs;
 
         // the root of the tree
         /*struct TreeNode root;
@@ -25,10 +37,12 @@ int main(void) {
 	struct TreeNode *root_ptr = &root;*/
 
         // Add your code below:
-        while (fgets(buf, BUFFER_SIZE, stdin) != NULL) {
-                
+        while (fgets(buf, BUFFER_SIZE, stdin) != NULL)
+        {
+                numArgs = tokenize(buf, args);
+                printf("%d", numArgs);
         }
 
-
-        return 0;
+        if (numArgs == 0) printError;
+                return 0;
 }
