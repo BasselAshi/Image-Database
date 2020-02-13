@@ -29,34 +29,29 @@ int main(void)
     int numArgs;
 
     // the root of the tree
-    /*struct TreeNode root;
+    struct TreeNode root;
         root.value = "";
         root.child = NULL;
         root.sibling = NULL;
 
-	struct TreeNode *root_ptr = &root;*/
+	struct TreeNode *root_ptr = &root;
 
     // Add your code below:
     while (fgets(buf, BUFFER_SIZE, stdin) != NULL)
     {
         numArgs = tokenize(buf, args);
         
-        // No arguments or more than max
-        if (numArgs == 0 || numArgs > INPUT_ARG_MAX_NUM) {
-            printError();
-            continue;
-        }
-
-
-        if (args[0][0] == 'p' && args[0][1] == '\0') {
-            printf("print\n");
+        if (args[0][0] == 'p' && args[0][1] == '\0' && numArgs == 1) {
             // Print
-        } else if (args[0][0] == 'q' && args[0][1] == '\0') {
+            tree_print(root_ptr);
+        } else if (args[0][0] == 'q' && args[0][1] == '\0' && numArgs == 4) {
             // Query
-            printf("query\n");
-        } else if (args[0][0] == 'i' && args[0][1] == '\0') {
+            tree_search(root_ptr, args);
+        } else if (args[0][0] == 'i' && args[0][1] == '\0' && numArgs == 5) {
             // Insert
-            printf("insert\n");
+            tree_insert(root_ptr, args);
+        } else {
+            printError();
         }
     }
 

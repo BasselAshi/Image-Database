@@ -15,7 +15,9 @@ struct TreeNode {
         struct TreeNode *child;
 };
 
+struct TreeNode *tree_insert_helper(struct TreeNode *, struct TreeNode *, char **, int);
 void tree_insert(struct TreeNode *, char **);
+void tree_search_helper(struct TreeNode *, char **, int);
 void tree_search(const struct TreeNode *, char **);
 void tree_print(const struct TreeNode *);
 
