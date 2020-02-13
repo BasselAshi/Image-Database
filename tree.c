@@ -203,23 +203,24 @@ void tree_search(const struct TreeNode *root, char **values)
 	printf("\n");
 }
 
-void tree_print_helper(struct TreeNode *root, int level)
+void tree_print_helper(struct TreeNode *root, char **values, int level)
 {
 	if (root != NULL)
 	{
 		if (level == 0)
 		{
-			tree_print_helper(root->child, level + 1);
+			tree_print_helper(root->child, values, level + 1);
 		}
 		else if (level == 1 || level == 2 || level == 3)
 		{
-			tree_print_helper(root->child, level + 1);
-			tree_print_helper(root->sibling, level);
+			strcpy(values[level], root->value);
+			tree_print_helper(root->child, values, level + 1);
+			tree_print_helper(root->sibling, values, level);
 		}
 		else if (level == 4)
 		{
-			//printf("%s %s %s %s", root->value);
-			tree_print_helper(root->sibling, level);
+			printf("%s %s %s %s\n", values[1], values[2], values[3], root->value);
+			tree_print_helper(root->sibling, values, level);
 		}
 	}
 }
@@ -238,6 +239,10 @@ void tree_print(const struct TreeNode *tree)
 	}
 
 	struct TreeNode *tr = (struct TreeNode *)tree;
-	tree_print_helper(tr, 0);
+	char *values[INPUT_ARG_MAX_NUM];
+	values[1] = malloc(BUFFER_SIZE);
+	values[2] = malloc(BUFFER_SIZE);
+	values[3] = malloc(BUFFER_SIZE);
+	tree_print_helper(tr, values, 0);
 	printf("\n");
 }
