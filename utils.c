@@ -22,7 +22,6 @@ int tokenize(char *cmd, char **cmd_argv)
                 if (numTokens < INPUT_ARG_MAX_NUM)
                 {
                         strcpy(cmd_argv[numTokens], token);
-                        printf("%s\n", cmd_argv[numTokens]);
                 }
                 numTokens++;
                 token = strtok(NULL, DELIMITERS);
